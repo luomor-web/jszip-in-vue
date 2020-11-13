@@ -114,10 +114,12 @@
                     const proList = []
                     const zip = new JSZip()
                     const cache = {}
+                    let img
                     await imgList.forEach(item => {
                         const pro = this.getUrlBase64(item, '.jpg').then(base64 => {
                             const fileName = item.replace(/(.*\/)*([^.]+)/i,"$2")
-                            zip.file(fileName, base64.substring(base64.indexOf(',') + 1), {
+                            img = zip.folder("images");
+                            img.file(fileName, base64.substring(base64.indexOf(',') + 1), {
                                 base64: true
                             })
                             cache[fileName] = base64
